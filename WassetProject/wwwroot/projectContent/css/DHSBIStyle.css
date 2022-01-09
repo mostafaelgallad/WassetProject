@@ -1,0 +1,614 @@
+﻿/*Start chart Content Style*/
+body {
+    background-color: #f1f1f1;
+}
+
+.MainCardNum {
+    /*
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #d5d9de;
+    margin-top: 1px;
+    box-shadow: 2px 2px 6px #ddd;
+    border-radius: 5px;
+*/
+    box-shadow: 2px 2px 6px #ddd;
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-bottom: 1px solid #e0e3e8;
+    margin-bottom: 1rem;
+    /*display: flex;
+    align-items: center;
+    flex-direction: row;*/
+    /*    padding: 1rem 2rem;*/
+    /*padding: 1rem 1rem 1rem 1rem;*/
+    /*height: 105px;*/
+}
+
+    .MainCardNum p {
+        margin-bottom: 0rem;
+        color: #888;
+        font-size: 0.9rem;
+    }
+
+.CardNumIcon {
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    text-align: center;
+    background: #f2f3f5;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #e5e9ec;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.CardNumText {
+    /*display: inline-block;*/
+    text-align:left;
+}
+
+.CardNumber {
+    color: #333;
+    font-family: Rubik,Helvetica,Arial,serif;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 0px;
+    font-size: 1.5rem;
+}
+.CardNumber2 {
+    color: #333;
+    font-family: Rubik,Helvetica,Arial,serif;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 0px;
+    font-size: 1.8rem;
+}
+
+.CardNumIconGreen {
+    background-color: #e1fff0 !important;
+    color: #22de80 !important;
+}
+
+.CardNumIconblue {
+    background-color: #d2def5;
+    color: #3566c1 !important;
+}
+
+.CardNumIconOrange {
+    background-color: #fff2e2;
+    color: #fda229 !important;
+}
+
+.CardNumIconPurple {
+    background-color: #F3EDFC !important;
+    color: #7642DC !important;
+}
+
+.CardNumIconRed {
+    background-color: #FFEFF2 !important;
+    color: #FC4B7C !important;
+}
+
+.CardNumIcon [class^="flaticon-"]:before, .CardNumIcon [class*=" flaticon-"]:before, .CardNumIcon [class^="flaticon-"]:after, .CardNumIcon [class*=" flaticon-"]:after {
+    font-size: 25px;
+}
+
+.CardNumIcon i {
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+.CardNumIcon .ContractIcon {
+    margin-left: 5px;
+}
+
+.CardNumIcon .UserIcon {
+    font-size: 20px;
+    margin-top: 0px;
+}
+
+    .CardNumIcon .UserIcon[class^="flaticon-"]:before, .CardNumIcon .UserIcon[class*=" flaticon-"]:before, .CardNumIcon .UserIcon[class^="flaticon-"]:after, .CardNumIcon .UserIcon[class*=" flaticon-"]:after {
+        font-size: 20px;
+    }
+
+.ChartCard {
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-bottom: 1px solid #e0e3e8;
+    box-shadow: 2px 2px 6px #ddd;
+}
+
+.ChartRefresh {
+    z-index: 1;
+}
+
+    .ChartRefresh .IconBTN {
+        padding-top: 2px;
+        color: #fff !important;
+    }
+
+.ChartRefresh2 {
+    right: 25px;
+}
+
+.apexcharts-toolbar {
+    display: none;
+}
+
+.MainUserTitle {
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.MainCardNum2 {
+    box-shadow: 2px 2px 6px #ddd;
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-bottom: 1px solid #e0e3e8;
+    margin-bottom: 2px;
+    padding: 1rem 1rem;
+    min-height: 260px;
+}
+
+.MainCardTitleBox {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500 !important;
+    line-height: 100%;
+    color: #444343;
+    margin-bottom: 10px;
+}
+
+.gutters {
+    text-align: center;
+}
+
+.info-stats3 div {
+    display: inline-block;
+    text-align: left;
+}
+
+.info-stats3 i {
+    margin: 0 10px .5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: -6px;
+    margin-left: 0px;
+    position: relative;
+    top: -4px;
+}
+
+.info-stats3.shade-one-b i {
+    color: #24BB4F;
+}
+
+.info-stats3.shade-one-a i {
+    color: #b7b0b0;
+}
+
+.ProviderDiv .info-stats3.shade-one-b i {
+    color: #FC960F;
+}
+
+.ProviderDiv .info-stats3.shade-one-a i {
+    color: #b7b0b0;
+}
+
+.ChartContractIcon.flaticon-contract-1:before {
+    content: "\f113";
+    font-size: 1.5rem;
+    font-weight: 500 !important;
+}
+
+.info-stats3.shade-one-a i.ChartContractIcon {
+    color: #7b7b7b
+}
+
+.ChartContractIcon {
+    top: -2px;
+}
+
+.info-stats3 h3 {
+    font-family: Rubik,Helvetica,Arial,serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #475F7B;
+    margin-bottom: 0px;
+    font-size: 1.5rem;
+}
+
+.info-stats3 h6 {
+    color: #888888;
+    margin-top: 0px;
+    font-weight: 400;
+    font-size: .85rem;
+    margin-bottom: .2rem;
+}
+/*.SearchBtn {
+    background-color: #FDAD27;
+    color: #fff;
+    border-radius: 5px;
+    border: 0;
+    padding: 7px 15px;
+    margin-top: 1px;
+    font-weight: 500;
+}*/
+.SearchBtn {
+    background-color: #FDAD27;
+    color: #fff;
+    border-radius: 5px;
+    border: 0;
+    padding: 7px 15px;
+    margin-top: 2px;
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+    .SearchBtn i {
+        position: relative;
+        top: 2px;
+        right: 2px;
+        font-size: 1rem;
+    }
+
+    .SearchBtn:hover {
+        background-color: #fba920;
+    }
+/*.SearchBtn i {
+    position: relative;
+    top: 2px;
+    right: 2px;
+}*/
+.RefreshBtn {
+    background-color: transparent;
+}
+
+    .RefreshBtn:hover {
+        background-color: #f2f4f4;
+    }
+
+.ChartRefresh .IconBTN {
+    color: #afafaf !important;
+}
+
+    .ChartRefresh .IconBTN:hover {
+        cursor: pointer
+    }
+
+    .ChartRefresh .IconBTN i {
+        font-size: 1.4rem;
+    }
+/*tabs style*/
+.nav.nav-tabs {
+    margin-bottom: 1rem;
+    border-bottom-color: #e4e2e2;
+}
+
+.MainTabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #333;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: inherit !important;
+}
+
+.MainTabs .nav-tabs .nav-link.active::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    background-color: #fdad27;
+    width: 100%;
+    height: 2px;
+    bottom: 0px;
+    left: 0;
+    -webkit-animation: mov .2s 1 linear;
+    -moz-animation: mov .2s 1 linear;
+    -o-animation: mov .2s 1 linear;
+    animation: mov .2s 1 linear;
+}
+
+@-webkit-keyframes mov {
+    0% {
+        width: 0;
+        left: 50%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@-moz-keyframes mov {
+    0% {
+        width: 0;
+        left: 50%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@-o-keyframes mov {
+    0% {
+        width: 0;
+        left: 50%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes mov {
+    0% {
+        width: 0;
+        left: 50%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.MainTabs .nav.nav-tabs ~ .tab-content {
+    padding-left: 0rem;
+}
+
+.MainTabs .nav-pills .nav-link, .nav-tabs .nav-link {
+    background-color: transparent;
+    color: #a9a9a9;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.nav.nav-pills .nav-item .nav-link:hover, .nav.nav-tabs .nav-item .nav-link:hover {
+    color: #333;
+}
+
+.nav.nav-pills .nav-item .nav-link.active:hover, .nav.nav-tabs .nav-item .nav-link.active:hover {
+    color: #333;
+}
+
+.MainTabs .nav.nav-tabs .nav-item {
+    width: 122px;
+    padding-bottom: 0rem;
+}
+
+.FilterMainDDL {
+    position: absolute;
+    z-index: 5;
+    right: 14px;
+    top: 43px;
+}
+
+    .FilterMainDDL .nav-link {
+        color: #fdad27;
+    }
+
+        .FilterMainDDL .nav-link .bx {
+            font-size: 1.3rem;
+        }
+
+    .FilterMainDDL .nav-item .dropdown-menu {
+        width: 200px;
+        padding: 10px;
+        left: -10px !important;
+    }
+
+    .FilterMainDDL .SearchBtn i {
+        position: relative;
+        top: 3px;
+        right: 2px;
+        font-size: 1rem;
+        color: #fff;
+    }
+
+.subCardGrayDiv .select2-container--default .select2-selection--single {
+    height: 35px;
+}
+
+.subCardGrayDiv .addMrB {
+    margin-bottom: 5px;
+}
+
+.info-stats3 .bx-loader {
+    font-size: 1.3rem;
+}
+/*End chart Content Style*/
+/*Start chart Table Style*/
+.TableProgress.progress {
+    height: 1.2rem;
+    overflow: visible;
+    background-color: #e4e6e6;
+}
+
+.TableProgress .Green {
+    background-color: #acf3d0;
+    color: #17804c;
+    box-shadow: 0 2px 4px 0 #39da8a9c;
+}
+
+.TableProgress .blue {
+    background-color: #d2def5;
+    color: #3566c1 !important;
+    box-shadow: 0 2px 4px 0 rgb(90 141 238 / 51%);
+}
+
+.TableProgress .orange {
+    background-color: #ffe7ca;
+    color: #fda229 !important;
+    box-shadow: 0 2px 4px 0 #fdac419e;
+}
+
+.TableProgress .red {
+    background-color: #FFDEDE;
+    color: #FF5B5C !important;
+    box-shadow: 0 2px 4px 0 #ff5b5c66;
+}
+
+.smallprogressSpan {
+    font-size: .55rem;
+}
+
+.NoDatatableDiv {
+    position: relative
+}
+
+    .NoDatatableDiv .LoadDataBtn {
+        top: 115px;
+    }
+
+    .NoDatatableDiv .TableOverLay::after {
+        height: 82%;
+    }
+
+    .NoDatatableDiv .MainCardTitleBox {
+        margin-bottom: 20px;
+    }
+
+#ShowHideVRefreshBtn, #ShowHidePRefreshBtn {
+    display: none;
+}
+/*End chart Table Style*/
+/*Start Chart Style*/
+.apexcharts-text.apexcharts-pie-label {
+    font-size: 0.6rem;
+}
+
+.apexcharts-tooltip.apexcharts-theme-dark {
+    color: #fff !important;
+    background: rgba(30, 30, 30, 0.8);
+}
+
+.pieChartDiv {
+    width: 50%;
+    margin: 0 auto;
+}
+/*End Chart Style*/
+@media(max-width:767px) {
+    .ChartRefresh {
+        right: 25px;
+    }
+
+    .ChartRefresh3 {
+        right: 10px;
+    }
+
+    .MainCardNum2 {
+        margin-bottom: 15px;
+    }
+
+    div.dataTables_wrapper div.dataTables_info {
+        text-align: left;
+    }
+
+    .pieChartDiv {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .MainTabs .nav.nav-tabs .nav-item {
+        width: 145px;
+    }
+}
+/*.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 18px;
+}
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    top: 0px;
+}
+input[type="search" i]:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+}*/
+
+.SubCardTITLE h2 {
+    font-size: 1rem;
+    color: #333333;
+}
+.SubCardTITLE p {
+    position: absolute;
+    display: inline-block;
+    top: 2.7rem;
+    right: 0.5rem;
+    /* font-size: 0.8rem; */
+}
+.SubCardTITLE p i{
+    font-size: 1rem;
+    position: relative;
+    top: 1px;
+}
+.GreenNum {
+    color: #42BB62;
+}
+.RedNum {
+    color: #f83f37;
+}
+ .lastInDiv {
+    right: 2rem !important;
+}
+
+.canvasjs-chart-credit{
+    display:none;
+}
+.MainCardNumHeader {
+    padding: 1rem 1rem 1rem 1rem;
+}
+
+#geographic-map {
+    width: 100%;
+    height: 350px;
+}
+.MapSizeList li {
+    position: relative;
+    display: block;
+    padding: .5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    margin: 1px;
+}
+.MapDiv .card-body {
+    padding: 0.5rem;
+}
+.MapDiv .card-body p{
+    font-size:0.8rem;
+}
+    .MapDiv .card-body h2 {
+        color: #333;
+        font-family: Rubik,Helvetica,Arial,serif;
+        font-weight: 400;
+        line-height: 1.1;
+        margin-bottom: 0px;
+        font-size: 1.8rem;
+    }
+
+#backButton {
+    border-radius: 4px;
+    padding: 3px 14px;
+    border: none;
+    font-size: 16px;
+    background-color: #dfe3e7;
+    color: #464d5c;
+    position: absolute;
+    top: 10px;
+    right: 52px;
+    cursor: pointer;
+}
+
+.invisible {
+    display: none;
+}

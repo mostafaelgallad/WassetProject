@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WassetPortalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="WassetPortalDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Actions" EntityType="WassetPortalDBModel.Action" />
+    <EntitySet Name="Organizations" EntityType="WassetPortalDBModel.Organization" />
+    <EntitySet Name="Roles" EntityType="WassetPortalDBModel.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="WassetPortalDBModel.sysdiagram" />
+    <EntitySet Name="User_Role" EntityType="WassetPortalDBModel.User_Role" />
+    <EntitySet Name="UserActions" EntityType="WassetPortalDBModel.UserAction" />
+    <EntitySet Name="Users" EntityType="WassetPortalDBModel.User" />
+    <AssociationSet Name="FK_UserAction_Actions" Association="WassetPortalDBModel.FK_UserAction_Actions">
+      <End Role="Action" EntitySet="Actions" />
+      <End Role="UserAction" EntitySet="UserActions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Organization" Association="WassetPortalDBModel.FK_Users_Organization">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role_Roles" Association="WassetPortalDBModel.FK_User_Role_Roles">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User_Role" EntitySet="User_Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role_Users" Association="WassetPortalDBModel.FK_User_Role_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User_Role" EntitySet="User_Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAction_Users" Association="WassetPortalDBModel.FK_UserAction_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserAction" EntitySet="UserActions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Action">
+    <Key>
+      <PropertyRef Name="ActionID" />
+    </Key>
+    <Property Name="ActionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ActionStatus" Type="Boolean" />
+    <NavigationProperty Name="UserActions" Relationship="WassetPortalDBModel.FK_UserAction_Actions" FromRole="Action" ToRole="UserAction" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="OrgID" />
+    </Key>
+    <Property Name="OrgID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrgName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="OrgAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="OrgStatus" Type="Boolean" />
+    <NavigationProperty Name="Users" Relationship="WassetPortalDBModel.FK_Users_Organization" FromRole="Organization" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoleStatus" Type="Boolean" />
+    <NavigationProperty Name="User_Role" Relationship="WassetPortalDBModel.FK_User_Role_Roles" FromRole="Role" ToRole="User_Role" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User_Role">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_UserID" Type="Int64" />
+    <Property Name="FK_RoleID" Type="Int32" />
+    <Property Name="UserRoleStatus" Type="Boolean" />
+    <NavigationProperty Name="Role" Relationship="WassetPortalDBModel.FK_User_Role_Roles" FromRole="User_Role" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="WassetPortalDBModel.FK_User_Role_Users" FromRole="User_Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserAction">
+    <Key>
+      <PropertyRef Name="UserActionID" />
+    </Key>
+    <Property Name="UserActionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_UserID" Type="Int64" />
+    <Property Name="FK_ActionID" Type="Int32" />
+    <Property Name="UserActionStatus" Type="Boolean" />
+    <NavigationProperty Name="Action" Relationship="WassetPortalDBModel.FK_UserAction_Actions" FromRole="UserAction" ToRole="Action" />
+    <NavigationProperty Name="User" Relationship="WassetPortalDBModel.FK_UserAction_Users" FromRole="UserAction" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UserStatus" Type="Boolean" />
+    <Property Name="FK_OrgID" Type="Int32" />
+    <NavigationProperty Name="Organization" Relationship="WassetPortalDBModel.FK_Users_Organization" FromRole="User" ToRole="Organization" />
+    <NavigationProperty Name="User_Role" Relationship="WassetPortalDBModel.FK_User_Role_Users" FromRole="User" ToRole="User_Role" />
+    <NavigationProperty Name="UserActions" Relationship="WassetPortalDBModel.FK_UserAction_Users" FromRole="User" ToRole="UserAction" />
+    <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_UserAction_Actions">
+    <End Type="WassetPortalDBModel.Action" Role="Action" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.UserAction" Role="UserAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Action">
+        <PropertyRef Name="ActionID" />
+      </Principal>
+      <Dependent Role="UserAction">
+        <PropertyRef Name="FK_ActionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Organization">
+    <End Type="WassetPortalDBModel.Organization" Role="Organization" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrgID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="FK_OrgID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role_Roles">
+    <End Type="WassetPortalDBModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.User_Role" Role="User_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="User_Role">
+        <PropertyRef Name="FK_RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role_Users">
+    <End Type="WassetPortalDBModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.User_Role" Role="User_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="User_Role">
+        <PropertyRef Name="FK_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAction_Users">
+    <End Type="WassetPortalDBModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="WassetPortalDBModel.UserAction" Role="UserAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserAction">
+        <PropertyRef Name="FK_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

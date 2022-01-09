@@ -1,0 +1,115 @@
+/* Authentication page css */
+/*-------------------------*/
+.bg-authentication {
+    background-color: rgba(255,255,255,0.8);
+}
+
+    .bg-authentication #icon-arrow {
+        position: absolute;
+        top: 11px;
+        right: 15px;
+    }
+
+    .bg-authentication .brand-text {
+        color: #5A8DEE;
+        font-weight: 600;
+        letter-spacing: 0.01rem;
+    }
+
+@media only screen and (min-width: 992px) {
+    .bg-authentication .disable-rounded-right {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* IE Specific CSS */
+    .bg-authentication {
+        width: 100%;
+        display: block;
+    }
+}
+
+.card.bg-authentication {
+       background-color: rgba(255,255,255,0.8);
+    border-radius: 40px;
+    border-radius: 5px 120px 5px 120px;
+        background-color: rgba(255,255,255,0.8);
+    margin: 30px;
+}
+
+.pdri {
+    padding-right: 200px;
+}
+
+.card.bg-authentication .card {
+    background: transparent;
+}
+
+@media only screen and (max-width: 992px) {
+
+
+    html body.blank-page .content-wrapper .flexbox-container {
+
+        -webkit-box-pack: flex-end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack flex-end: ;
+    justify-content: flex-end;
+    justify-content: center;
+    }
+    .pdri
+    {
+            padding-right: 0px !important;
+    }
+}
+
+.btn
+{
+
+}
+.blank-page .card.bg-authentication
+{
+        box-shadow: -1px 0px 20px 0 rgba(0,0,0,.3);
+}
+
+.bg-authentication .form-control
+{
+    border-radius:14px;
+}
+.divider .divider-text
+{
+    background:transparent;
+}
+
+
+.form-control:focus {
+    color: #475F7B;
+    background-color: #FFF;
+    border-color: #ee9307;
+    outline: 0;
+    box-shadow: 0 3px 8px 0 rgba(0,0,0,.1);
+}
+
+.btn-primary.hover, .btn-primary:hover {
+    background-color: #ee9307 !important;
+    color: #FFF;
+}
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 0 solid transparent;
+    padding: .467rem 1.5rem;
+    font-size: 1rem;
+    line-height: 2.0rem;
+    border-radius: .367rem;
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}

@@ -1,0 +1,98 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("./flaticon.ttf?818f9ab22efcf477214faa66774a308f") format("truetype"),
+url("./flaticon.woff?818f9ab22efcf477214faa66774a308f") format("woff"),
+url("./flaticon.woff2?818f9ab22efcf477214faa66774a308f") format("woff2"),
+url("./flaticon.eot?818f9ab22efcf477214faa66774a308f#iefix") format("embedded-opentype"),
+url("./flaticon.svg?818f9ab22efcf477214faa66774a308f#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-battery:before {
+    content: "\f101";
+}
+.flaticon-checklist:before {
+    content: "\f102";
+}
+.flaticon-city:before {
+    content: "\f103";
+}
+.flaticon-clipboard:before {
+    content: "\f104";
+}
+.flaticon-cloud:before {
+    content: "\f105";
+}
+.flaticon-computer:before {
+    content: "\f106";
+}
+.flaticon-contract:before {
+    content: "\f107";
+}
+.flaticon-data-integration:before {
+    content: "\f108";
+}
+.flaticon-data-processing:before {
+    content: "\f109";
+}
+.flaticon-download-1:before {
+    content: "\f10a";
+}
+.flaticon-download-2:before {
+    content: "\f10b";
+}
+.flaticon-download:before {
+    content: "\f10c";
+}
+.flaticon-inbox:before {
+    content: "\f10d";
+}
+.flaticon-install:before {
+    content: "\f10e";
+}
+.flaticon-live-streaming:before {
+    content: "\f10f";
+}
+.flaticon-online-course:before {
+    content: "\f110";
+}
+.flaticon-paper-roll:before {
+    content: "\f111";
+}
+.flaticon-plastic-film:before {
+    content: "\f112";
+}
+.flaticon-presentation-1:before {
+    content: "\f113";
+}
+.flaticon-presentation-2:before {
+    content: "\f114";
+}
+.flaticon-presentation:before {
+    content: "\f115";
+}
+.flaticon-settings:before {
+    content: "\f116";
+}
+.flaticon-sustainable:before {
+    content: "\f117";
+}
+.flaticon-tools:before {
+    content: "\f118";
+}
+.flaticon-training:before {
+    content: "\f119";
+}
+.flaticon-website:before {
+    content: "\f11a";
+}

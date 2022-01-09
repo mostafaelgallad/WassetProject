@@ -1,0 +1,96 @@
+﻿.form-floating > .form-control, .form-floating > .form-select {
+    height: calc(2.4rem + 2px) !important;
+    padding: 0rem .75rem;
+    border-radius: 5px !important;
+    color: #333;
+    font-size: 0.85rem;
+    background-color: #F5F7FA !important;
+}
+
+.form-floating > label {
+    color: #9a9696;
+    font-weight: 400;
+    text-transform: capitalize;
+    padding: 0.6rem .75rem;
+    /*padding-left: 24px;*/
+    font-size: 0.8rem;
+}
+
+.form-floating > .form-control:focus ~ label, .form-floating > .form-control:not(:placeholder-shown) ~ label, .form-floating > .form-select ~ label {
+    opacity: .9;
+    transform: scale(.85) translateY(-.5rem) translateX(.15rem);
+}
+
+.form-floating > .form-control:focus {
+    background-color: #fff !important;
+    border: 1px solid #ddd !important;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem #a3afbd14;
+}
+
+.floatingInput {
+    border-radius: 5px !important;
+}
+
+.floatInputs input[type='text'], .floatInputs input[type='email'] {
+    border-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+}
+
+.card.bg-authentication {
+    border-radius: 40px !important;
+}
+
+.card.bg-ar-authentication {
+    border-radius: 40px !important;
+}
+
+.LoginTitle {
+    color: #313e49;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+#LoginResult {
+    font-size: 0.85rem;
+    /*text-align: center;*/
+}
+
+.LoginBody {
+    background: url('../../imgs/auth-bg.jpg') center center no-repeat;
+    /*background: url(../imgs/auth-bg.jpg) center center no-repeat;*/
+    background-size: cover;
+}
+.LoginLangAr .selected-language, .dropdown-toggle::after {
+    color: #fff;
+}
+.checkbox.checkbox-sm label::after, .checkbox.checkbox-sm label::before {
+    width: 15px;
+    height: 15px;
+    top: 3px;
+    background-color: #f5f7fa;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 12%);
+}
+.checkbox input:checked ~ label:after {
+    border-color: #175ee4 !important;
+
+}
+.LoginCard .card-footer, .LoginCard .card-header {
+    padding: 1.4rem 0.5rem;
+}
+
+.LoginCard .card-body {
+    padding: 1.7rem 1rem;
+}
+
+.LoginCard .LoginTitle {
+    font-size: 1.2rem;
+}
+
+.LoginCard #LoginResult {
+    font-size: 0.8rem;
+}

@@ -1,0 +1,14 @@
+G:\work\Projects\WassetPortal_DAL\bin\Debug\WassetPortal_DAL.dll.config
+G:\work\Projects\WassetPortal_DAL\bin\Debug\WassetPortal_DAL.dll
+G:\work\Projects\WassetPortal_DAL\bin\Debug\WassetPortal_DAL.pdb
+G:\work\Projects\WassetPortal_DAL\bin\Debug\EntityFramework.dll
+G:\work\Projects\WassetPortal_DAL\bin\Debug\EntityFramework.SqlServer.dll
+G:\work\Projects\WassetPortal_DAL\bin\Debug\Newtonsoft.Json.dll
+G:\work\Projects\WassetPortal_DAL\bin\Debug\EntityFramework.xml
+G:\work\Projects\WassetPortal_DAL\bin\Debug\EntityFramework.SqlServer.xml
+G:\work\Projects\WassetPortal_DAL\bin\Debug\Newtonsoft.Json.xml
+G:\work\Projects\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csproj.AssemblyReference.cache
+G:\work\Projects\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csproj.CoreCompileInputs.cache
+G:\work\Projects\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csproj.CopyComplete
+G:\work\Projects\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.dll
+G:\work\Projects\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.pdb

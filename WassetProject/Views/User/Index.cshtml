@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Users</h2>
+
+<div class="row">
+    <ul class="list-group col-md-3">
+        <li class="list-group-item" onclick="_UserIndexHandler.GetUsersList()">Users</li>
+        <li class="list-group-item" onclick="_UserIndexHandler.GetActionsList()">Actions</li>
+        <li class="list-group-item" onclick="_UserIndexHandler.GetRolesList()">Roles</li>
+        <li class="list-group-item" onclick="_UserIndexHandler.GetOrgsList()">Organization</li>
+    </ul>
+
+    <div id="Review-Section" class="col-md-9">
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/Content/js/User/UserIndex.js"></script>
+}

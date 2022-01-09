@@ -1,0 +1,129 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?818f9ab22efcf477214faa66774a308f") format("truetype"),
+url("./flaticon.woff?818f9ab22efcf477214faa66774a308f") format("woff"),
+url("./flaticon.woff2?818f9ab22efcf477214faa66774a308f") format("woff2"),
+url("./flaticon.eot?818f9ab22efcf477214faa66774a308f#iefix") format("embedded-opentype"),
+url("./flaticon.svg?818f9ab22efcf477214faa66774a308f#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "battery": "\f101",
+    "checklist": "\f102",
+    "city": "\f103",
+    "clipboard": "\f104",
+    "cloud": "\f105",
+    "computer": "\f106",
+    "contract": "\f107",
+    "data-integration": "\f108",
+    "data-processing": "\f109",
+    "download-1": "\f10a",
+    "download-2": "\f10b",
+    "download": "\f10c",
+    "inbox": "\f10d",
+    "install": "\f10e",
+    "live-streaming": "\f10f",
+    "online-course": "\f110",
+    "paper-roll": "\f111",
+    "plastic-film": "\f112",
+    "presentation-1": "\f113",
+    "presentation-2": "\f114",
+    "presentation": "\f115",
+    "settings": "\f116",
+    "sustainable": "\f117",
+    "tools": "\f118",
+    "training": "\f119",
+    "website": "\f11a",
+);
+
+.flaticon-battery:before {
+    content: map-get($flaticon-map, "battery");
+}
+.flaticon-checklist:before {
+    content: map-get($flaticon-map, "checklist");
+}
+.flaticon-city:before {
+    content: map-get($flaticon-map, "city");
+}
+.flaticon-clipboard:before {
+    content: map-get($flaticon-map, "clipboard");
+}
+.flaticon-cloud:before {
+    content: map-get($flaticon-map, "cloud");
+}
+.flaticon-computer:before {
+    content: map-get($flaticon-map, "computer");
+}
+.flaticon-contract:before {
+    content: map-get($flaticon-map, "contract");
+}
+.flaticon-data-integration:before {
+    content: map-get($flaticon-map, "data-integration");
+}
+.flaticon-data-processing:before {
+    content: map-get($flaticon-map, "data-processing");
+}
+.flaticon-download-1:before {
+    content: map-get($flaticon-map, "download-1");
+}
+.flaticon-download-2:before {
+    content: map-get($flaticon-map, "download-2");
+}
+.flaticon-download:before {
+    content: map-get($flaticon-map, "download");
+}
+.flaticon-inbox:before {
+    content: map-get($flaticon-map, "inbox");
+}
+.flaticon-install:before {
+    content: map-get($flaticon-map, "install");
+}
+.flaticon-live-streaming:before {
+    content: map-get($flaticon-map, "live-streaming");
+}
+.flaticon-online-course:before {
+    content: map-get($flaticon-map, "online-course");
+}
+.flaticon-paper-roll:before {
+    content: map-get($flaticon-map, "paper-roll");
+}
+.flaticon-plastic-film:before {
+    content: map-get($flaticon-map, "plastic-film");
+}
+.flaticon-presentation-1:before {
+    content: map-get($flaticon-map, "presentation-1");
+}
+.flaticon-presentation-2:before {
+    content: map-get($flaticon-map, "presentation-2");
+}
+.flaticon-presentation:before {
+    content: map-get($flaticon-map, "presentation");
+}
+.flaticon-settings:before {
+    content: map-get($flaticon-map, "settings");
+}
+.flaticon-sustainable:before {
+    content: map-get($flaticon-map, "sustainable");
+}
+.flaticon-tools:before {
+    content: map-get($flaticon-map, "tools");
+}
+.flaticon-training:before {
+    content: map-get($flaticon-map, "training");
+}
+.flaticon-website:before {
+    content: map-get($flaticon-map, "website");
+}

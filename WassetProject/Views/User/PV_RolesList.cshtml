@@ -1,0 +1,44 @@
+﻿
+@model List<WassetPortal_DAL.Models.Role>
+
+<button class="btn btn-primary" onclick="_UserIndexHandler.CreateRole()">Create Role</button>
+<table class="table table-striped table-dark col-md-9">
+    <thead>
+        <tr>
+            <th scope="col">Role ID</th>
+            <th scope="col">Role Name</th>
+            <th scope="col">Role status</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null)
+            {
+                foreach (var role in Model)
+                {
+                    <tr>
+                        <th scope="row">@role.RoleID</th>
+                        <td>@role.RoleName</td>
+                        @{ if (role.RoleStatus == true)
+                            {
+                                <td>
+                                    Active
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    Not Active
+                                </td>
+                            }
+                        }
+                    <td>
+                        <span onclick="_UserIndexHandler.CreateRole('@role.RoleName')">Edit</span>
+                    </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

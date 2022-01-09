@@ -1,0 +1,10 @@
+﻿@model WassetPortal_DAL.Models.Organization
+
+<form id="OrgForm" action="/user/CreateOrg" type="Post">
+    <input type="text" placeholder="Organization Name" value="@Model.OrgName" name="OrgName" id="OrgName" />
+    <input type="text" placeholder="Organization Address" value="@Model.OrgAddress" name="OrgAddress" id="OrgAddress" />
+    <input type="hidden" value="@Model.OrgID" name="OrgID" id="OrgID" />
+    <input type="hidden" value="true" name="OrgStatus" id="OrgStatus" />
+    <input type="hidden" value="@ViewBag.IsEditMode" id="EditMode" />
+    <button class="btn btn-primary">Submit</button>
+</form>

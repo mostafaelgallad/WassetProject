@@ -1,0 +1,11 @@
+﻿
+@model WassetPortal_DAL.Models.Action
+
+<form id="ActionForm" action="/user/CreateAction" type="Post">
+    <input type="text" placeholder="Action Name" value="@Model.ActionName" name="ActionName" id="ActionName" />
+    <input type="text" placeholder="Decription " value="@Model.Description" name="Description" id="Description" />
+    <input type="hidden" value="@Model.ActionID" name="ActionID" id="ActionID" />
+    <input type="hidden" value="true" name="ActionStatus" id="ActionStatus" />
+    <input type="hidden" value="@ViewBag.IsEditMode" id="EditMode" />
+    <button class="btn btn-primary">Submit</button>
+</form>

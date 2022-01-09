@@ -1,0 +1,34 @@
+﻿.registForm {
+    padding: 0px 0px;
+    margin: 0px 0px;
+}
+.card-header h4 {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 400;
+}
+.packageContainer {
+    margin: 0px 10px 30px;
+    margin-top: -5px;
+}
+/*.SubscriptionNumber {
+    border-radius: 5px !important;
+    margin-top: 5px;
+}*/
+.PackageDDL .dropdown-wrapper {
+    /*display:none;*/
+    margin-right: 0px;
+}
+.stepsForm section {
+    padding: 22px;
+    max-width: 100%;
+    margin: -3px auto 7px;
+}
+.info p{
+    color: #ce8706;
+}
+.mainContent input[type='text'], .select2-container--default .select2-selection--single {
+    border-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+}
