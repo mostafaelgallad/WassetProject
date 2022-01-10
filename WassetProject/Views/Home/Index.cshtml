@@ -1,3 +1,30 @@
 ﻿@{
     ViewBag.Title = "Login Page";
 }
+<h1>Upload exel file</h1>
+@using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        @Html.TextBox("file", "", new { type = "file" }) <br />
+        <input type="submit" value="Upload" />
+        @ViewBag.Message
+    </div>
+}
+<button id="RadFile">Read</button>
+@section scripts{
+    <script>
+        $("#RadFile").on('click', function () {
+            $.ajax({
+                url: '/home/ReadFromExcel',
+                type: 'Post',
+                data: { fileName: "قائمة الدخل -اكتوبر 2021م.xls"},
+                success: function (res) {
+
+                },
+                error: function (err) {
+
+                }
+            })
+        })
+    </script>
+}
