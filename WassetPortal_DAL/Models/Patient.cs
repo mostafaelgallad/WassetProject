@@ -12,14 +12,17 @@ namespace WassetPortal_DAL.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserAction
+    public partial class Patient
     {
-        public long UserActionID { get; set; }
-        public Nullable<long> FK_UserID { get; set; }
-        public Nullable<int> FK_ActionID { get; set; }
-        public Nullable<bool> UserActionStatus { get; set; }
-    
-        public virtual Action Action { get; set; }
-        public virtual User User { get; set; }
+        public long ID { get; set; }
+        public string Name { get; set; }
+        public string PASSPORT { get; set; }
+        public string ID_IQAMA { get; set; }
+        public string NATIONALITY { get; set; }
+        public string Gender { get; set; }
+        public string DOB { get; set; }
+        public string MOBILE { get; set; }
+        public string HESN_NO { get; set; }
+        public string C_Case { get; set; }
     }
 }

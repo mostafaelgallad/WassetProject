@@ -23,6 +23,21 @@
           <Property Name="OrgAddress" Type="nvarchar" MaxLength="500" />
           <Property Name="OrgStatus" Type="bit" />
         </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="PASSPORT" Type="nvarchar" MaxLength="30" />
+          <Property Name="ID_IQAMA" Type="nvarchar" MaxLength="50" />
+          <Property Name="NATIONALITY" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="DOB" Type="nvarchar" MaxLength="100" />
+          <Property Name="MOBILE" Type="nvarchar" MaxLength="50" />
+          <Property Name="HESN_NO" Type="nvarchar" MaxLength="50" />
+          <Property Name="_Case" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="RoleID" />
@@ -133,9 +148,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="USP_InsertPatientInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="WassetPortalDBModelStoreContainer">
           <EntitySet Name="Actions" EntityType="Self.Actions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Role" EntityType="Self.User_Role" Schema="dbo" store:Type="Tables" />
@@ -194,6 +211,8 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserAction" EntitySet="UserActions" />
           </AssociationSet>
+          <EntitySet Name="Patients" EntityType="WassetPortalDBModel.Patient" />
+          <FunctionImport Name="USP_InsertPatientInfo" />
         </EntityContainer>
         <EntityType Name="Action">
           <Key>
@@ -333,6 +352,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PASSPORT" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ID_IQAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NATIONALITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HESN_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Case" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -414,6 +448,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="WassetPortalDBModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="C_Case" ColumnName="_Case" />
+                <ScalarProperty Name="HESN_NO" ColumnName="HESN_NO" />
+                <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="NATIONALITY" ColumnName="NATIONALITY" />
+                <ScalarProperty Name="ID_IQAMA" ColumnName="ID_IQAMA" />
+                <ScalarProperty Name="PASSPORT" ColumnName="PASSPORT" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_InsertPatientInfo" FunctionName="WassetPortalDBModel.Store.USP_InsertPatientInfo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

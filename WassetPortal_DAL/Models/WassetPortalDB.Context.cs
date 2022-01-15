@@ -12,6 +12,8 @@ namespace WassetPortal_DAL.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class WassetPortalDBEntities : DbContext
     {
@@ -32,5 +34,11 @@ namespace WassetPortal_DAL.Models
         public virtual DbSet<User_Role> User_Role { get; set; }
         public virtual DbSet<UserAction> UserActions { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Patient> Patients { get; set; }
+    
+        public virtual int USP_InsertPatientInfo()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_InsertPatientInfo");
+        }
     }
 }

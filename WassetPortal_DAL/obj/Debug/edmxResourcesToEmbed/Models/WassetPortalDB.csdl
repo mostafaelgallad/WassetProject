@@ -28,6 +28,8 @@
       <End Role="User" EntitySet="Users" />
       <End Role="UserAction" EntitySet="UserActions" />
     </AssociationSet>
+    <EntitySet Name="Patients" EntityType="WassetPortalDBModel.Patient" />
+    <FunctionImport Name="USP_InsertPatientInfo" />
   </EntityContainer>
   <EntityType Name="Action">
     <Key>
@@ -167,4 +169,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="PASSPORT" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ID_IQAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NATIONALITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HESN_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="C_Case" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

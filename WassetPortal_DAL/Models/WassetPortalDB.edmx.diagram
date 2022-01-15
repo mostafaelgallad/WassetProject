@@ -17,6 +17,7 @@
         <AssociationConnector Association="WassetPortalDBModel.FK_User_Role_Roles" />
         <AssociationConnector Association="WassetPortalDBModel.FK_User_Role_Users" />
         <AssociationConnector Association="WassetPortalDBModel.FK_UserAction_Users" />
+        <EntityTypeShape EntityType="WassetPortalDBModel.Patient" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

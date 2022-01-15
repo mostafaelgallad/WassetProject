@@ -9,11 +9,9 @@
 
 namespace WassetPortal_DAL.Models
 {
-using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
+    
     public partial class Action
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,10 +24,7 @@ using Newtonsoft.Json;
         public string ActionName { get; set; }
         public string Description { get; set; }
         public Nullable<bool> ActionStatus { get; set; }
-
-        [JsonIgnore]
-        [IgnoreDataMember]
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserAction> UserActions { get; set; }
     }

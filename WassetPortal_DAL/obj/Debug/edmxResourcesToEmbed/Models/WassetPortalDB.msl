@@ -76,5 +76,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="WassetPortalDBModel.Patient">
+        <MappingFragment StoreEntitySet="Patient">
+          <ScalarProperty Name="C_Case" ColumnName="_Case" />
+          <ScalarProperty Name="HESN_NO" ColumnName="HESN_NO" />
+          <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="NATIONALITY" ColumnName="NATIONALITY" />
+          <ScalarProperty Name="ID_IQAMA" ColumnName="ID_IQAMA" />
+          <ScalarProperty Name="PASSPORT" ColumnName="PASSPORT" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="USP_InsertPatientInfo" FunctionName="WassetPortalDBModel.Store.USP_InsertPatientInfo" />
   </EntityContainerMapping>
 </Mapping>

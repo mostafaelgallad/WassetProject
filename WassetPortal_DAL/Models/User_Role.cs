@@ -9,22 +9,17 @@
 
 namespace WassetPortal_DAL.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
+    
     public partial class User_Role
     {
         public long UserRoleID { get; set; }
         public Nullable<long> FK_UserID { get; set; }
         public Nullable<int> FK_RoleID { get; set; }
         public Nullable<bool> UserRoleStatus { get; set; }
-        [JsonIgnore]
-        [IgnoreDataMember]
+    
         public virtual Role Role { get; set; }
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual User User { get; set; }
     }
 }

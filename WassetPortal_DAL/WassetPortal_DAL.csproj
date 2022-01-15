@@ -59,6 +59,9 @@
     <Compile Include="Models\Organization.cs">
       <DependentUpon>WassetPortalDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Patient.cs">
+      <DependentUpon>WassetPortalDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Role.cs">
       <DependentUpon>WassetPortalDB.tt</DependentUpon>
     </Compile>
