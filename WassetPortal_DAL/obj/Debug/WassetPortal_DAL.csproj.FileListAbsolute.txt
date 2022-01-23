@@ -26,3 +26,16 @@ G:\work\Wasset\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csproj.CoreCompileInp
 G:\work\Wasset\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csproj.CopyComplete
 G:\work\Wasset\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.dll
 G:\work\Wasset\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.pdb
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\bin\Debug\WassetPortal_DAL.dll.config
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\bin\Debug\WassetPortal_DAL.dll
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\bin\Debug\WassetPortal_DAL.pdb
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\bin\Debug\EntityFramework.dll
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\bin\Debug\EntityFramework.xml
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csproj.CoreCompileInputs.cache
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.csproj.CopyComplete
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.dll
+C:\Users\var1\Downloads\WassetProject-main\project\WassetProject\WassetPortal_DAL\obj\Debug\WassetPortal_DAL.pdb

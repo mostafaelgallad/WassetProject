@@ -5,53 +5,213 @@
 }
 @model WassetPortal.Models.ViewModels.UserViewModel
 
-<h2>CreateUser</h2>
-<form action="/" method="post" id="userForm">
-    <div class="row">
-        <div class="colmd-6">
-            <div id="roleList" style="display:none;">
-                @Html.Raw(Json.Encode(Model.Roles))
-            </div>
-            <div id="actionList" style="display:none;">
-                @Html.Raw(Json.Encode(Model.Actions))
-            </div>
-            <input type="hidden" name="FK_OrgID" id="FK_OrgID" value="@Model.User.FK_OrgID" />
-            <input type="hidden" name="EditMode" id="EditMode" value="@ViewBag.EditMode" />
-            <input type="hidden" name="userID" id="UserID" value="@Model.User.UserID" />
-            <input type="text" placeholder="User Name" name="UserName" id="UserName" value="@Model.User.UserName" />
-            <input type="text" placeholder="Mobile" name="Mobile" id="Mobile" value="@Model.User.Mobile" />
-            <input type="text" placeholder="Email" name="Email" id="Email" value="@Model.User.Email" />
-            <input type="text" placeholder="Address" name="Address" id="Address" value="@Model.User.Address" />
-            <input type="text" placeholder="Code" name="UserCode" id="UserCode" value="@Model.User.UserCode" />
-            <input type="text" placeholder="Password" name="Password" id="Password" value="@Model.User.Password" />
-            <select name="role" id="role">
-                <option value="">Select Role</option>
-                @foreach (var role in Model.Roles)
-                {
-                    <option value="@role.RoleID">@role.RoleName</option>
-                }
-            </select>
-            <div id="UserRole">
-                <div id="UserRole-Edit" style="display:none">
-                    @Html.Raw(Json.Encode(Model.User_Roles))
+@*<form action="/" method="post" id="userForm">*@
+    @*<div class="row">
+            <div class="colmd-6">
+                <div id="roleList" style="display:none;">
+                    @Html.Raw(Json.Encode(Model.Roles))
+                </div>
+                <div id="actionList" style="display:none;">
+                    @Html.Raw(Json.Encode(Model.Actions))
+                </div>
+                <input type="hidden" name="FK_OrgID" id="FK_OrgID" value="@Model.User.FK_OrgID" />
+                <input type="hidden" name="EditMode" id="EditMode" value="@ViewBag.EditMode" />
+                <input type="hidden" name="userID" id="UserID" value="@Model.User.UserID" />
+                <input type="text" placeholder="User Name" name="UserName" id="UserName" value="@Model.User.UserName" />
+                <input type="text" placeholder="Mobile" name="Mobile" id="Mobile" value="@Model.User.Mobile" />
+                <input type="text" placeholder="Email" name="Email" id="Email" value="@Model.User.Email" />
+                <input type="text" placeholder="Address" name="Address" id="Address" value="@Model.User.Address" />
+                <input type="text" placeholder="Code" name="UserCode" id="UserCode" value="@Model.User.UserCode" />
+                <input type="text" placeholder="Password" name="Password" id="Password" value="@Model.User.Password" />
+                <select name="role" id="role">
+                    <option value="">Select Role</option>
+                    @foreach (var role in Model.Roles)
+                    {
+                        <option value="@role.RoleID">@role.RoleName</option>
+                    }
+                </select>
+                <div id="UserRole">
+                    <div id="UserRole-Edit" style="display:none">
+                        @Html.Raw(Json.Encode(Model.User_Roles))
+                    </div>
+                </div>
+                <select name="action" id="action">
+                    <option value="">Select Action</option>
+                    @foreach (var action in Model.Actions)
+                    {
+                        <option value="@action.ActionID">@action.ActionName</option>
+                    }
+                </select>
+                <div id="UserAction">
+                    <div id="UserAction-Edit" style="display:none">
+                        @Html.Raw(Json.Encode(Model.UserActions))
+                    </div>
                 </div>
             </div>
-            <select name="action" id="action">
-                <option value="">Select Action</option>
-                @foreach (var action in Model.Actions)
-                {
-                    <option value="@action.ActionID">@action.ActionName</option>
-                }
-            </select>
-            <div id="UserAction">
-                <div id="UserAction-Edit" style="display:none">
-                    @Html.Raw(Json.Encode(Model.UserActions))
-                </div>
+        </div>*@
+
+    <div id="roleList" style="display:none;">
+        @Html.Raw(Json.Encode(Model.Roles))
+    </div>
+    <div id="actionList" style="display:none;">
+        @Html.Raw(Json.Encode(Model.Actions))
+    </div>
+    <input type="hidden" name="FK_OrgID" id="FK_OrgID" value="@Model.User.FK_OrgID" />
+    <input type="hidden" name="EditMode" id="EditMode" value="@ViewBag.EditMode" />
+    <input type="hidden" name="userID" id="UserID" value="@Model.User.UserID" />
+
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Create user</h4>
+                <form id="userForm" class="form-sample">
+                    <p class="card-description">
+                        Personal info
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="Name" name="UserName" id="UserName" value="@Model.User.UserName" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="Email" name="Email" id="Email" value="@Model.User.Email" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Gender</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Date of Birth</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" placeholder="dd/mm/yyyy" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Role</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="role" id="role">
+                                        <option value="">Select Role</option>
+                                        @foreach (var role in Model.Roles)
+                                        {
+                            <option value="@role.RoleID">@role.RoleName</option>}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Action</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="action" id="action">
+                                        <option value="">Select Action</option>
+                                        @foreach (var role in Model.Actions)
+                                        {
+                            <option value="@role.ActionID">@role.ActionName</option>
+}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-description">
+                        Contact Info
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Address</label>
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="Address" name="Address" id="Address" value="@Model.User.Address" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Mobile</label>
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="Mobile" name="Mobile" id="Mobile" value="@Model.User.Mobile" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Address 2</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Postcode</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Code</label>
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="Code" name="UserCode" id="UserCode" value="@Model.User.UserCode" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                  
+                    <div id="UserRole">
+                        <div id="UserRole-Edit" style="display:none">
+                            @Html.Raw(Json.Encode(Model.User_Roles))
+                        </div>
+                    </div>
+                    
+                    <div id="UserAction">
+                        <div id="UserAction-Edit" style="display:none">
+                            @Html.Raw(Json.Encode(Model.UserActions))
+                        </div>
+                    </div>
+                    <button name="submit" id="submit" type="submit" class="btn btn-primary btn-icon-text">
+                        <i class="typcn typcn-document btn-icon-prepend"></i>
+                        Submit
+                    </button>
+                </form>
             </div>
         </div>
     </div>
-    <button name="submit" id="submit">Submit</button>
-</form>
+    @*<button name="submit" id="submit" type="button" class="btn btn-primary btn-icon-text">
+        <i class="typcn typcn-document btn-icon-prepend"></i>
+        Submit
+    </button>*@
+
+@*</form>*@
 @section scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/Content/js/User/UserHandler.js"></script>
