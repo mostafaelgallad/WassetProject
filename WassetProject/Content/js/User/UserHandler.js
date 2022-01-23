@@ -9,7 +9,7 @@ let _UserHandler = function () {
             Email: {
                 required: true,
                 email: true,
-            },
+            }, 
             UserName: {
                 required: true,
                 minlength: 3,
