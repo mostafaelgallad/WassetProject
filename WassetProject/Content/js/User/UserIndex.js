@@ -62,7 +62,7 @@ let _UserIndexHandler = function () {
         })
     }
 
-    let _CreateOrg = function (orgID) {
+    let _CreateOrg = function (orgID = "") {
         $.ajax({
             url: "/user/CreateOrg?OrgID=" + orgID,
             type: "get",
@@ -89,7 +89,7 @@ let _UserIndexHandler = function () {
             submitHandler: function (form) {
                 let url = '/user/CreateOrg'
                 if ($("#EditMode").val() === 'true')
-                    url = 'user/updateOrg'
+                    url = '/user/updateOrg'
                 $.ajax({
                     url: url,
                     type: "post",
@@ -105,7 +105,7 @@ let _UserIndexHandler = function () {
         }
     }
 
-    let _CreateAction = function (actionName) {
+    let _CreateAction = function (actionName = "") {
         $.ajax({
             url: "/user/CreateAction?actionName=" + actionName,
             type: "get",
@@ -146,7 +146,7 @@ let _UserIndexHandler = function () {
         }
     }
 
-    let _CreateRole = function (roleName) {
+    let _CreateRole = function (roleName = "") {
         $.ajax({
             url: "/user/CreateRole?roleName=" + roleName,
             type: "get",
@@ -171,7 +171,7 @@ let _UserIndexHandler = function () {
             submitHandler: function (form) {
                 let url = '/user/CreateRole'
                 if ($("#EditMode").val() === 'true')
-                    url = 'user/updateRole'
+                    url = '/user/updateRole'
                 $.ajax({
                     url: url,
                     type: "post",

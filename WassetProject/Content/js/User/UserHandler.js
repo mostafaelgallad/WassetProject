@@ -9,7 +9,7 @@ let _UserHandler = function () {
             Email: {
                 required: true,
                 email: true,
-            }, 
+            },
             UserName: {
                 required: true,
                 minlength: 3,
@@ -127,15 +127,15 @@ let _UserHandler = function () {
     let _UserModel = function () {
         return {
             User: {
-                UserName: $("#UserName").val().trim(),
-                UserCode: $("#UserCode").val().trim(),
-                Mobile: $("#Mobile").val().trim(),
-                Email: $("#Email").val().trim(),
-                Address: $("#Address").val().trim(),
+                UserName: $("#UserName").val(),
+                UserCode: $("#UserCode").val(),
+                Mobile: $("#Mobile").val(),
+                Email: $("#Email").val(),
+                Address: $("#Address").val(),
                 UserStatus: true,
-                FK_OrgID: $("#FK_OrgID").val().trim(),
-                Password: $("#Password").val().trim(),
-                UserID: $("#UserID").val().trim(),
+                FK_OrgID: $("#FK_OrgID").val(),
+                Password: $("#Password").val(),
+                UserID: $("#UserID").val(),
             },
             User_Roles: _UserRoles,
             UserActions: _UserActions
@@ -160,6 +160,16 @@ let _UserHandler = function () {
 
     return {
         init: function () {
+            let actionOptions = ""
+            //_Actions?.map(item => {
+            //    actionOptions += `<option value="${item.actionID}">${item.actionName}</option>`
+            //})
+            //$("#action").html(actionOptions)
+            //let roleOptions = ""
+            //_Roles?.map(item => {
+            //    roleOptions += `<option value="${item.roleID}">${item.roleName}</option>`
+            //})
+            //$("#action").html(roleOptions)
             $('form[id="userForm"]').validate(validateOptions)
             _PageEvents();
             _BindUserAuth();

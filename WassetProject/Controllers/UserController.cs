@@ -21,19 +21,19 @@ namespace WassetPortal.Controllers
         // GET: User
         public ActionResult Index()
         {
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //  {
+            try
             {
-                try
-                {
-                    return View();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
+                return View();
             }
-            return RedirectToAction("LogIn", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            //  }
+            //  return RedirectToAction("LogIn", "login", new { area = "" });
         }
 
         #region Create Methods
@@ -41,217 +41,213 @@ namespace WassetPortal.Controllers
         public ActionResult CreateUser()
         {
             // to Do == add check for user permission to create new user
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //  {
+            try
             {
-                try
-                {
-                    UserViewModel model = new UserViewModel();
-                    model.User = new User()
-                    {
-                        FK_OrgID = orgID
-                    };
-                    model.Actions = MapToActionsVM(_userRepository.GetActionsList()?.Where(a => a.ActionStatus == true).ToList());
-                    model.Roles = MapToRolesVM(_userRepository.GetRolesList()?.Where(r => r.RoleStatus == true).ToList());
-                    return View(model);
-                }
-                catch (Exception)
-                {
-                    return RedirectToAction("Index");
-                }
+                UserViewModel model = new UserViewModel();
+                //model.User = new User()
+                //{
+                //    FK_OrgID = orgID
+                //};
+                model.Actions = MapToActionsVM(_userRepository.GetActionsList()?.Where(a => a.ActionStatus == true).ToList());
+                model.Roles = MapToRolesVM(_userRepository.GetRolesList()?.Where(r => r.RoleStatus == true).ToList());
+                model.User = new User();
+                return View(model);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
+            }
+            //}
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpPost]
         public ActionResult CreateUser(UserViewModel model)
         {
             // to Do == add check for user permission to create new user
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // {
+            try
             {
-                try
+                if (model != null)
                 {
-                    if (model != null)
+                    var createdUser = _userRepository.CreateUser(model.User);
+                    if (createdUser != null)
                     {
-                        var createdUser = _userRepository.CreateUser(model.User);
-                        if (createdUser != null)
+                        _userRepository.InsertUserAction(MapUserAction(model.UserActions, createdUser.UserID));
+                        _userRepository.InsertUserRole(MapUserRole(model.User_Roles, createdUser.UserID));
+                        return Json(new
                         {
-                            _userRepository.InsertUserAction(MapUserAction(model.UserActions, createdUser.UserID));
-                            _userRepository.InsertUserRole(MapUserRole(model.User_Roles, createdUser.UserID));
-                            return Json(new
-                            {
-                                Success = true,
-                                user = JsonConvert.SerializeObject(createdUser, Formatting.Indented,
-                                                                    new JsonSerializerSettings
-                                                                    {
-                                                                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-                                                                    })
-                            }, JsonRequestBehavior.AllowGet);
-                        }
+                            Success = true
+                        }, JsonRequestBehavior.AllowGet);
                     }
-                    return Json(new { Success = false, Message = "User not created please try again" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "User not created please try again" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            //}
+            //// return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpGet]
         public ActionResult CreateAction(string actionName)
         {
             // to Do == add check for user permission to create new action
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //{
+            var action = new Actions();
+            if (!string.IsNullOrEmpty(actionName))
             {
-                var action = new Actions();
-                if (!string.IsNullOrEmpty(actionName))
-                {
-                    ViewBag.IsEditMode = "true";
-                    action = _userRepository.GetActionByName(actionName);
-                }
-                //partial view
-                return PartialView("PV_CreateAction", action);
+                ViewBag.IsEditMode = "true";
+                action = _userRepository.GetActionByName(actionName);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            //partial view
+            return PartialView("PV_CreateAction", action);
+            // }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpPost]
         public ActionResult CreateAction(WassetPortal_DAL.Models.Action model)
         {
             // to Do == add check for user permission to create new action
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //  {
+            try
             {
-                try
+                if (model != null)
                 {
-                    if (model != null)
+                    var createdAction = _userRepository.CreateAction(model);
+                    if (createdAction != null)
                     {
-                        var createdAction = _userRepository.CreateAction(model);
-                        if (createdAction != null)
+                        return Json(new
                         {
-                            return Json(new
-                            {
-                                Success = true,
-                                user = JsonConvert.SerializeObject(createdAction, Formatting.Indented,
-                                                                    new JsonSerializerSettings
-                                                                    {
-                                                                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-                                                                    })
-                            }, JsonRequestBehavior.AllowGet);
-                        }
+                            Success = true,
+                            user = JsonConvert.SerializeObject(createdAction, Formatting.Indented,
+                                                                new JsonSerializerSettings
+                                                                {
+                                                                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                                                                })
+                        }, JsonRequestBehavior.AllowGet);
                     }
-                    return Json(new { Success = false, Message = "action not created please try again" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "action not created please try again" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            // }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpGet]
         public ActionResult CreateRole(string roleName)
         {
             // to Do == add check for user permission to create new role
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // {
+            var role = new Role();
+            if (!string.IsNullOrEmpty(roleName))
             {
-                var role = new Role();
-                if (!string.IsNullOrEmpty(roleName))
-                {
-                    ViewBag.IsEditMode = "true";
-                    role = _userRepository.GetRoleByName(roleName);
-                }
-                //partial view
-                return PartialView("PV_CreateRole", role);
+                ViewBag.IsEditMode = "true";
+                role = _userRepository.GetRoleByName(roleName);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            //partial view
+            return PartialView("PV_CreateRole", role);
+            // }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpPost]
         public ActionResult CreateRole(Role role)
         {
             // to Do == add check for user permission to create new role
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //  {
+            try
             {
-                try
+                if (role != null)
                 {
-                    if (role != null)
+                    var createdRole = _userRepository.CreateRole(role);
+                    if (createdRole != null)
                     {
-                        var createdRole = _userRepository.CreateRole(role);
-                        if (createdRole != null)
+                        return Json(new
                         {
-                            return Json(new
-                            {
-                                Success = true,
-                                user = JsonConvert.SerializeObject(createdRole, Formatting.Indented,
-                                                                    new JsonSerializerSettings
-                                                                    {
-                                                                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-                                                                    })
-                            }, JsonRequestBehavior.AllowGet);
-                        }
+                            Success = true,
+                            user = JsonConvert.SerializeObject(createdRole, Formatting.Indented,
+                                                                new JsonSerializerSettings
+                                                                {
+                                                                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                                                                })
+                        }, JsonRequestBehavior.AllowGet);
                     }
-                    return Json(new { Success = false, Message = "Role not created please try again" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "Role not created please try again" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            // }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpGet]
         public ActionResult CreateOrg(int? OrgID)
         {
             // to Do == add check for user permission to create new org
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // {
+            var org = new Organization();
+            if (OrgID != null)
             {
-                var org = new Organization();
-                if (OrgID != null)
-                {
-                    ViewBag.IsEditMode = "true";
-                    org = _userRepository.GetOrgByID(OrgID);
-                }
-                //partial view
-                return PartialView("PV_CreateOrg", org);
+                ViewBag.IsEditMode = "true";
+                org = _userRepository.GetOrgByID(OrgID);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            //partial view
+            return PartialView("PV_CreateOrg", org);
+            //  }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpPost]
         public ActionResult CreateOrg(Organization organization)
         {
             // to Do == add check for user permission to create new org
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // {
+            try
             {
-                try
+                if (organization != null)
                 {
-                    if (organization != null)
+                    var createdOrganization = _userRepository.CreateOrganization(organization);
+                    if (createdOrganization != null)
                     {
-                        var createdOrganization = _userRepository.CreateOrganization(organization);
-                        if (createdOrganization != null)
-                        {
-                            return Json(new { Success = true, user = JsonConvert.SerializeObject(createdOrganization) }, JsonRequestBehavior.AllowGet);
-                        }
+                        return Json(new { Success = true, user = JsonConvert.SerializeObject(createdOrganization) }, JsonRequestBehavior.AllowGet);
                     }
-                    return Json(new { Success = false, Message = "Organization not created please try again" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "Organization not created please try again" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            // }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
         #endregion
 
@@ -305,405 +301,387 @@ namespace WassetPortal.Controllers
         public ActionResult UpdateUser(long? userID)
         {
             // to Do == add check for user permission to update user
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // {
+            if (userID != null)
             {
-                if (userID != null)
+                try
                 {
-                    try
+                    var user = _userRepository.GetUserByID((long)userID);
+                    if (user != null)
                     {
-                        var user = _userRepository.GetUserByID((long)userID);
-                        if (user != null)
-                        {
-                            UserViewModel model = new UserViewModel();
-                            model.Actions = MapToActionsVM(_userRepository.GetActionsList()?.Where(a => a.ActionStatus == true).ToList());
-                            model.Roles = MapToRolesVM(_userRepository.GetRolesList()?.Where(r => r.RoleStatus == true).ToList());
-                            model.UserActions = MapUserActionVM(_userRepository.GetUserAction(userID), (long)userID);
-                            model.User_Roles = MapUserRoleVM(_userRepository.GetUserRoles(userID), (long)userID);
-                            model.User = user;
-                            ViewBag.EditMode = "True";
-                            return View("CreateUser",model);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        return RedirectToAction("Index");
+                        UserViewModel model = new UserViewModel();
+                        model.Actions = MapToActionsVM(_userRepository.GetActionsList()?.Where(a => a.ActionStatus == true).ToList());
+                        model.Roles = MapToRolesVM(_userRepository.GetRolesList()?.Where(r => r.RoleStatus == true).ToList());
+                        model.UserActions = MapUserActionVM(_userRepository.GetUserAction(userID), (long)userID);
+                        model.User_Roles = MapUserRoleVM(_userRepository.GetUserRoles(userID), (long)userID);
+                        model.User = user;
+                        ViewBag.EditMode = "True";
+                        return View("CreateUser", model);
                     }
                 }
-                return RedirectToAction("Index");
+                catch (Exception)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            return RedirectToAction("Index");
+            //  }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpPost]
         public ActionResult UpdateUser(UserViewModel model)
         {
             // to Do == add check for user permission to udate user
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // {
+            try
             {
-                try
+                if (model != null)
                 {
-                    if (model != null)
+                    var returnedUser = _userRepository.UpdateUser(model.User);
+                    if (returnedUser != null)
                     {
-                        var returnedUser = _userRepository.UpdateUser(model.User);
-                        if (returnedUser != null)
+                        _userRepository.UpdateUserAction(MapUserAction(model.UserActions, returnedUser.UserID));
+                        _userRepository.UpdateUserRole(MapUserRole(model.User_Roles, returnedUser.UserID));
+                        return Json(new
                         {
-                            _userRepository.UpdateUserAction(MapUserAction(model.UserActions, returnedUser.UserID));
-                            _userRepository.UpdateUserRole(MapUserRole(model.User_Roles, returnedUser.UserID));
-                            return Json(new
-                            {
-                                Success = true,
-                                user = JsonConvert.SerializeObject(returnedUser, Formatting.Indented,
-                                                                    new JsonSerializerSettings
-                                                                    {
-                                                                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-                                                                    })
-                            }, JsonRequestBehavior.AllowGet);
-                        }
+                            Success = true
+                        }, JsonRequestBehavior.AllowGet);
                     }
-                    return Json(new { Success = false, Message = "User not updated please try again" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "User not updated please try again" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            //  }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpGet]
         public ActionResult UpdateOrg(int? organizationID)
         {
             // to Do == add check for user permission to create new user
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //  {
+            if (organizationID != null)
             {
-                if (organizationID != null)
+                var org = _userRepository.GetOrgByID(organizationID);
+                if (org != null)
                 {
-                    var org = _userRepository.GetOrgByID(organizationID);
-                    if (org != null)
-                    {
-                        return PartialView("", org);
-                    }
+                    return PartialView("", org);
                 }
-                return RedirectToAction("Index");
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            return RedirectToAction("Index");
+            // }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpPost]
         public ActionResult UpdateOrg(Organization organization)
         {
             // to Do == add check for user permission to update org
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //  {
+            try
             {
-                try
+                if (organization != null)
                 {
-                    if (organization != null)
+                    var returnedOrg = _userRepository.UpdateOrg(organization);
+                    if (returnedOrg != null)
                     {
-                        var returnedOrg = _userRepository.UpdateOrg(organization);
-                        if (returnedOrg != null)
+                        return Json(new
                         {
-                            return Json(new
-                            {
-                                Success = true,
-                                user = JsonConvert.SerializeObject(returnedOrg, Formatting.Indented,
-                                                                    new JsonSerializerSettings
-                                                                    {
-                                                                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-                                                                    })
-                            }, JsonRequestBehavior.AllowGet);
-                        }
+                            Success = true
+                        }, JsonRequestBehavior.AllowGet);
                     }
-                    return Json(new { Success = false, Message = "Organization not updated please try again" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "Organization not updated please try again" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            // }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpGet]
         public ActionResult UpdateAction(string actionName)
         {
             // to Do == add check for user permission to upadet action 
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // {
+            if (!string.IsNullOrEmpty(actionName))
             {
-                if (!string.IsNullOrEmpty(actionName))
+                var action = _userRepository.GetActionByName(actionName);
+                if (action != null)
                 {
-                    var action = _userRepository.GetActionByName(actionName);
-                    if (action != null)
-                    {
-                        return PartialView("", action);
-                    }
+                    return PartialView("", action);
                 }
-                return RedirectToAction("Index");
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            return RedirectToAction("Index");
+            // }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpPost]
         public ActionResult UpdateAction(Actions model)
         {
             // to Do == add check for user permission to update action 
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // {
+            try
             {
-                try
+                if (model != null)
                 {
-                    if (model != null)
+                    var returnedAction = _userRepository.UpdateAction(model);
+                    if (returnedAction != null)
                     {
-                        var returnedAction = _userRepository.UpdateAction(model);
-                        if (returnedAction != null)
+                        return Json(new
                         {
-                            return Json(new
-                            {
-                                Success = true,
-                                user = JsonConvert.SerializeObject(returnedAction, Formatting.Indented,
-                                                                    new JsonSerializerSettings
-                                                                    {
-                                                                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-                                                                    })
-                            }, JsonRequestBehavior.AllowGet);
-                        }
+                            Success = true
+                        }, JsonRequestBehavior.AllowGet);
                     }
-                    return Json(new { Success = false, Message = "Action not updated please try again" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "Action not updated please try again" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            //}
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpGet]
         public ActionResult UpdateRole(string roleName)
         {
             // to Do == add check for user permission to upadet action 
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //{
+            if (!string.IsNullOrEmpty(roleName))
             {
-                if (!string.IsNullOrEmpty(roleName))
+                try
                 {
-                    try
+                    var role = _userRepository.GetRoleByName(roleName);
+                    if (role != null)
                     {
-                        var role = _userRepository.GetRoleByName(roleName);
-                        if (role != null)
-                        {
-                            return PartialView("", role);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        return RedirectToAction("Index");
+                        return PartialView("", role);
                     }
                 }
-                return RedirectToAction("Index");
+                catch (Exception)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            return RedirectToAction("Index");
+            // }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         [HttpPost]
         public ActionResult UpdateRole(Role role)
         {
             // to Do == add check for user permission to update action 
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //{
+            try
             {
-                try
+                if (role != null)
                 {
-                    if (role != null)
+                    var returnedRole = _userRepository.UpdateRole(role);
+                    if (returnedRole != null)
                     {
-                        var returnedRole = _userRepository.UpdateRole(role);
-                        if (returnedRole != null)
-                        {
-                            return Json(new { Success = true, user = JsonConvert.SerializeObject(returnedRole) }, JsonRequestBehavior.AllowGet);
-                        }
+                        return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
                     }
-                    return Json(new { Success = false, Message = "Action not updated please try again" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "Action not updated please try again" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            //}
+            // return RedirectToAction("login", "login", new { area = "" });
         }
         #endregion
 
         public ActionResult GetUsersList()
         {
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //{
+            try
             {
-                try
-                {
-                    var users = _userRepository.GetUsersList(orgID);
-                    return PartialView("PV_UsersList", users);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
+                var users = _userRepository.GetUsersList(1);
+                return PartialView("PV_UsersList", users);
             }
-            return RedirectToAction("LogIn", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            //  }
+            //  return RedirectToAction("LogIn", "login", new { area = "" });
         }
 
         public ActionResult GetRolesList()
         {
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //{
+            try
             {
-                try
-                {
-                    var roles = _userRepository.GetRolesList();
-                    return PartialView("PV_RolesList", roles);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
+                var roles = _userRepository.GetRolesList();
+                return PartialView("PV_RolesList", roles);
             }
-            return RedirectToAction("LogIn", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            // }
+            // return RedirectToAction("LogIn", "login", new { area = "" });
         }
 
         public ActionResult GetActionsList()
         {
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //{
+            try
             {
-                try
-                {
-                    var actions = _userRepository.GetActionsList();
-                    return PartialView("PV_ActionsList", actions);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
+                var actions = _userRepository.GetActionsList();
+                return PartialView("PV_ActionsList", actions);
             }
-            return RedirectToAction("LogIn", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            //  }
+            // return RedirectToAction("LogIn", "login", new { area = "" });
         }
 
         public ActionResult GetOrgsList()
         {
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //  {
+            try
             {
-                try
-                {
-                    var orgs = _userRepository.GetOrgsList();
-                    return PartialView("PV_OrgsList", orgs);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
+                var orgs = _userRepository.GetOrgsList();
+                return PartialView("PV_OrgsList", orgs);
             }
-            return RedirectToAction("LogIn", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            // }
+            // return RedirectToAction("LogIn", "login", new { area = "" });
         }
 
         #region Check if exist methods
         public ActionResult CheckForActionName(string actionName)
         {
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //   {
+            try
             {
-                try
+                if (!string.IsNullOrEmpty(actionName))
                 {
-                    if (!string.IsNullOrEmpty(actionName))
-                    {
-                        var action = _userRepository.GetActionByName(actionName);
-                        if (action == null)
-                            return Json(new { Success = true, Message = "Action Not exist" }, JsonRequestBehavior.AllowGet);
+                    var action = _userRepository.GetActionByName(actionName);
+                    if (action == null)
+                        return Json(new { Success = true, Message = "Action Not exist" }, JsonRequestBehavior.AllowGet);
 
-                        return Json(new { Success = false, Message = "Action already exist" }, JsonRequestBehavior.AllowGet);
-                    }
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "Action already exist" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            //}
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         public ActionResult CheckForRoleName(string roleName)
         {
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            //{
+            try
             {
-                try
+                if (!string.IsNullOrEmpty(roleName))
                 {
-                    if (!string.IsNullOrEmpty(roleName))
-                    {
-                        var role = _userRepository.GetRoleByName(roleName);
-                        if (role == null)
-                            return Json(new { Success = true, Message = "Role Not exist" }, JsonRequestBehavior.AllowGet);
-
-                        return Json(new { Success = false, Message = "Role already exist" }, JsonRequestBehavior.AllowGet);
-                    }
+                    var role = _userRepository.GetRoleByName(roleName);
+                    if (role == null)
+                        return Json(new { Success = true, Message = "Role Not exist" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "Role already exist" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            //  }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         public ActionResult CheckForUserName(string userName)
         {
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // {
+            try
             {
-                try
+                if (!string.IsNullOrEmpty(userName))
                 {
-                    if (!string.IsNullOrEmpty(userName))
-                    {
-                        var user = _userRepository.GetUserByName(userName);
-                        if (user == null)
-                            return Json(new { Success = true, Message = "User Not exist" }, JsonRequestBehavior.AllowGet);
-
-                        return Json(new { Success = false, Message = "User already exist" }, JsonRequestBehavior.AllowGet);
-                    }
+                    var user = _userRepository.GetUserByName(userName);
+                    if (user == null)
+                        return Json(new { Success = true, Message = "User Not exist" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "User already exist" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            //  }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
 
         public ActionResult CheckForOrgName(string orgName)
         {
-            var cookie_orgID = Request.Cookies["orgID"]?.Value;
-            if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // var cookie_orgID = Request.Cookies["orgID"]?.Value;
+            // if (!string.IsNullOrEmpty(cookie_orgID) && int.TryParse(cookie_orgID, out int orgID))
+            // {
+            try
             {
-                try
+                if (!string.IsNullOrEmpty(orgName))
                 {
-                    if (!string.IsNullOrEmpty(orgName))
-                    {
-                        var org = _userRepository.GetOrgByName(orgName);
-                        if (org == null)
-                            return Json(new { Success = true, Message = "Org Not exist" }, JsonRequestBehavior.AllowGet);
-
-                        return Json(new { Success = false, Message = "Org already exist" }, JsonRequestBehavior.AllowGet);
-                    }
+                    var org = _userRepository.GetOrgByName(orgName);
+                    if (org == null)
+                        return Json(new { Success = true, Message = "Org Not exist" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
-                {
-                    return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { Success = false, Message = "Org already exist" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("login", "login", new { area = "" });
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            //  }
+            // return RedirectToAction("login", "login", new { area = "" });
         }
         #endregion
 
