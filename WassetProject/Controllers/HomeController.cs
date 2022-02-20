@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
@@ -95,7 +96,7 @@ namespace WassetPortal.Controllers
                         Directory.CreateDirectory(Server.MapPath("~/Uploads"));
                     }
                     file[0].SaveAs(Server.MapPath("~/Uploads/") + file[0].FileName);
-                    return "Saved";
+                    return file[0].FileName;
                 }
                 else
                 {
@@ -108,7 +109,7 @@ namespace WassetPortal.Controllers
             }
         }
 
-        public DataTable ReadExcelFile(string sheetName = "Sheet1", string path = @"C:\Users\melga\Downloads\07.01.2022 (A).xlsx")
+        public DataTable ReadExcelFile(string path, string sheetName = "Sheet1")
         {
 
             using (OleDbConnection conn = new OleDbConnection())
@@ -133,10 +134,10 @@ namespace WassetPortal.Controllers
                 return dt;
             }
         }
-
-        public ActionResult InsertExcelData()
+        [HttpPost]
+        public ActionResult InsertExcelData (string path)
         {
-            var dt = ReadExcelFile();
+            var dt = ReadExcelFile(Server.MapPath("~/Uploads/") + path);
             bool flag = false;
             for (int i = 0; i <= dt.Columns.Count; i++)
             {
@@ -169,7 +170,8 @@ namespace WassetPortal.Controllers
             var name = new SqlParameter("@PatientsInfo", dt);
             name.TypeName = "dbo.PatientInfo";
             context.Database.ExecuteSqlCommand(commandText, name);
-            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+            string table = JsonConvert.SerializeObject(dt);
+            return Json(new { Success = true, table }, JsonRequestBehavior.AllowGet);
         }
     }
 }

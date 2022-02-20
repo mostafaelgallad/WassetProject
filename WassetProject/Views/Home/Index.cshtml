@@ -1,25 +1,91 @@
 ﻿@{
     ViewBag.Title = "Login Page";
 }
+<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 <h1>Upload exel file</h1>
-@using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div>
-        @Html.TextBox("file", "", new { type = "file" }) <br />
-        <input type="submit" value="Upload" />
-        @ViewBag.Message
-    </div>
-}
-<button id="RadFile">Read</button>
-@section scripts{
-    <script>
-        $("#RadFile").on('click', function () {
-            $.ajax({
-                url: '/home/ReadFromExcel',
-                type: 'Post',
-                data: { fileName: "قائمة الدخل -اكتوبر 2021م.xls"},
-                success: function (res) {
+<div>
+    <input type="file" id="inpt_ExcelFile" />
+    <div id="filePreview"></div>
+    <button class="btn btn-success" id="uploadExcel">upload</button>
+    <table class="table" id="PatientsTable">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">PASSPORT</th>
+                <th scope="col">ID_IQAMA</th>
+                <th scope="col">NATIONALITY</th>
+                <th scope="col">Gender</th>
+                <th scope="col">DOB</th>
+                <th scope="col">MOBILE</th>
+                <th scope="col">HESN_NO</th>
+                <th scope="col">_Case</th>
+            </tr>
+        </thead>
+        <tbody id="previewTable">
+        </tbody>
+    </table>
+</div>
 
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        //$("#inpt_ExcelFile").on('change', function () {
+        //    let excelFile = $(this).get(0)
+        //    if (typeof excelFile !== 'undefined') {
+        //        let reader = new FileReader()
+        //        reader.readAsDataURL(excelFile.files[0])
+        //        reader.onload = function (e) {
+        //            let ifram = `<iframe src="${e.target.result}" class="filePreview"/>`
+        //            $("#filePreview").html("")
+        //            $("#filePreview").html(ifram)
+        //        }
+        //    }
+        //})
+
+        $("#uploadExcel").on('click', function () {
+            let file = $("#inpt_ExcelFile").get(0)
+            let form = new FormData();
+            form.append("file", file.files[0])
+            $.ajax({
+                url: '/home/UploadFile',
+                type: 'Post',
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    if (res !== "failed") {
+                        $.ajax({
+                            url: '/home/InsertExcelData?path=' + res,
+                            type: 'Post',
+                            processData: false,
+                            contentType: false,
+                            success: function (res) {
+                                let insertedData = JSON.parse(res.table)
+                                let row = ""
+                                insertedData?.map(item => {
+                                    row += ` <tr>
+                                                        <td>${item.Name}</td>
+                                                        <td>${item.PASSPORT}</td>
+                                                        <td>${item.ID_IQAMA}</td>
+                                                        <td>${item.NATIONALITY}</td>
+                                                        <td>${item.GENDER}</td>
+                                                        <td>${item.DOB}</td>
+                                                        <td>${item.MOBILE}</td>
+                                                        <td>${item.HESN_NO ?? ""}</td>
+                                                        <td>${item._CASE}</td>
+                                                    </tr>`
+                                })
+                                $("#previewTable").html("")
+                                $("#previewTable").html(row)
+                                $('#PatientsTable').DataTable()
+                                console.log(res, JSON.parse(res.table));
+                            },
+                            error: function (err) {
+
+                            }
+                        })
+                    }
                 },
                 error: function (err) {
 
